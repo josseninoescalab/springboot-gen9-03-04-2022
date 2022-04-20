@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -17,6 +19,7 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idPaciente; //id_paciente
 
+    @Size(min = 3, max = 50, message = "El nombre no cumple con los valores especificados")
     @Column(name = "nombres", length = 70)
     private String nombres;
 
@@ -32,9 +35,19 @@ public class Paciente {
     @Column(name = "telefono")
     private String telefono;
 
+    @Email
     @Column(name = "email", unique = true)
     private String email;
     //private String purchasedOrder; //purchased_order
+
+
+    public Integer getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(Integer idPaciente) {
+        this.idPaciente = idPaciente;
+    }
 
     public String getNombres() {
         return nombres;
