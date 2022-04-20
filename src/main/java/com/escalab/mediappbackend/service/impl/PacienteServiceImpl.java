@@ -41,13 +41,19 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
     @Override
-    public Paciente update(Paciente paciente, Integer id) throws Exception {
+    public Paciente update(Paciente paciente, Integer id) {
         Optional<Paciente> findPaciente = pacienteRepository.findById(id);
         if(findPaciente.isPresent()){
             paciente.setIdPaciente(id);
             return save(paciente);
         }else{
-            throw new Exception("Error");
+            return new Paciente();
         }
+    }
+
+    @Override
+    public boolean deleteById(Integer id){
+        pacienteRepository.deleteById(id);
+        return true;
     }
 }
