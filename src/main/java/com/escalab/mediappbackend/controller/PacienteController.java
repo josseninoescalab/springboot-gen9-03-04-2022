@@ -44,7 +44,7 @@ public class PacienteController {
             @ApiResponse(code = 200, message = "Peticón OK")})
     @GetMapping
     public List<Paciente> findAll(){
-        return pacienteService.findAll();
+        return pacienteService.listar();
     }
 
     @ApiOperation(value = "Obtener todos el pacientes por su identificador",
@@ -58,7 +58,7 @@ public class PacienteController {
             @ApiResponse(code = 200, message = "Peticón OK")})
     @GetMapping("/{id}")
     public Paciente findById(@PathVariable("id") Integer id){
-        return pacienteService.findById(id);
+        return pacienteService.leerPorId(id);
     }
 
     @GetMapping("/nombre/{nombre}")
@@ -68,11 +68,11 @@ public class PacienteController {
 
     @PostMapping
     public Paciente save(@RequestBody Paciente paciente){
-        return pacienteService.save(paciente);
+        return pacienteService.registrar(paciente);
     }
 
     @PutMapping("/{id}")
     public Paciente update(@RequestBody Paciente paciente, @PathVariable("id") Integer id){
-        return pacienteService.update(paciente, id);
+        return pacienteService.modificar(paciente);
     }
 }

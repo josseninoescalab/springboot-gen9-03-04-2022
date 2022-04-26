@@ -2,35 +2,43 @@ package com.escalab.mediappbackend.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "rol")
 public class Rol {
+	
+	@Id
+	private Integer idRol;
+	
+	@Column(name = "nombre")
+	private String nombre;
+	
+	@Column(name = "descripcion")
+	private String descripcion;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idRol;
+	public Integer getIdRol() {
+		return idRol;
+	}
 
-    @Column(name = "nombre")
-    private String nombre;
+	public void setIdRol(Integer idRol) {
+		this.idRol = idRol;
+	}
 
-    public Integer getIdRol() {
-        return idRol;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setIdRol(Integer idRol) {
-        this.idRol = idRol;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
 }

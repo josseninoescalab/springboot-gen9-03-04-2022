@@ -21,12 +21,12 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
     @Override
-    public List<Paciente> findAll() {
+    public List<Paciente> listar() {
         return pacienteRepository.findAll();
     }
 
     @Override
-    public Paciente findById(Integer id) {
+    public Paciente leerPorId(Integer id) {
         Optional<Paciente> paciente = pacienteRepository.findById(id);
         if(paciente.isPresent()){
             return paciente.get();
@@ -41,24 +41,23 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
     @Override
-    public Paciente save(Paciente paciente) {
+    public Paciente registrar(Paciente paciente) {
         return pacienteRepository.save(paciente);
     }
 
     @Override
-    public Paciente update(Paciente paciente, Integer id) {
-        Optional<Paciente> findPaciente = pacienteRepository.findById(id);
+    public Paciente modificar(Paciente paciente) {
+        Optional<Paciente> findPaciente = pacienteRepository.findById(paciente.getIdPaciente());
         int variable = 0/2;
         if(findPaciente.isPresent()){
-            paciente.setIdPaciente(id);
-            return save(paciente);
+            return modificar(paciente);
         }else{
             return new Paciente();
         }
     }
 
     @Override
-    public boolean deleteById(Integer id){
+    public boolean eliminar(Integer id){
         pacienteRepository.deleteById(id);
         return true;
     }

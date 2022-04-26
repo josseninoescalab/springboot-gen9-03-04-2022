@@ -23,21 +23,21 @@ public class MedicoController {
 
     @GetMapping
     public List<Medico> findAll(){
-        return medicoService.findAll();
+        return medicoService.listar();
     }
 
     @GetMapping("/{id}")
     public Medico findById(@PathVariable("id") Integer id){
-        return medicoService.findById(id);
+        return medicoService.leerPorId(id);
     }
 
     @PostMapping
     public Medico save(@RequestBody Medico medico){
-        return medicoService.save(medico);
+        return medicoService.registrar(medico);
     }
 
     @PutMapping("/{id}")
     public Medico update(@RequestBody Medico medico, @PathVariable("id") Integer id){
-        return medicoService.update(medico, id);
+        return medicoService.modificar(medico);
     }
 }

@@ -17,12 +17,12 @@ public class MedicoServiceImpl implements MedicoService {
     private MedicoRepository medicoRepository;
 
     @Override
-    public List<Medico> findAll() {
+    public List<Medico> listar() {
         return medicoRepository.findAll();
     }
 
     @Override
-    public Medico findById(Integer id) {
+    public Medico leerPorId(Integer id) {
         Optional<Medico> medico = medicoRepository.findById(id);
         if(medico.isPresent()){
             return medico.get();
@@ -32,17 +32,17 @@ public class MedicoServiceImpl implements MedicoService {
     }
 
     @Override
-    public Medico save(Medico medico) {
+    public Medico registrar(Medico medico) {
         return medicoRepository.save(medico);
     }
 
     @Override
-    public Medico update(Medico medico, Integer id) {
-        return save(medico);
+    public Medico modificar(Medico medico) {
+        return registrar(medico);
     }
 
     @Override
-    public boolean deleteById(Integer id) {
+    public boolean eliminar(Integer id) {
         medicoRepository.deleteById(id);
         return true;
     }
