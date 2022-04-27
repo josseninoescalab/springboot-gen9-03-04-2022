@@ -75,8 +75,8 @@ public class ConsultaController {
 		for (Consulta c : consultas) {
 			ConsultaDTO d = new ConsultaDTO();
 			d.setIdConsulta(c.getIdConsulta());
-			d.setMedico(c.getMedico());
-			d.setPaciente(c.getPaciente());
+			//d.setMedico(c.getMedico());
+			//d.setPaciente(c.getPaciente());
 
 			// localhost:8080/consultas/1
 			ControllerLinkBuilder linkTo = linkTo(methodOn(ConsultaController.class).listarPorId((c.getIdConsulta())));
@@ -90,6 +90,10 @@ public class ConsultaController {
 
 			ControllerLinkBuilder linkTo2 = linkTo(methodOn(MedicoController.class).findById((c.getMedico().getIdMedico())));
 			d.add(linkTo2.withSelfRel());
+
+			// localhost:0880/especialidad/1
+			ControllerLinkBuilder linkEspecialidad = linkTo(methodOn(EspecialidadController.class).listarPorId(c.getEspecialidad().getIdEspecialidad()));
+			d.add(linkEspecialidad.withSelfRel());
 			consultasDTO.add(d);
 		}
 		return consultasDTO;

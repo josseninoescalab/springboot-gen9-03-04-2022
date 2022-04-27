@@ -2,6 +2,7 @@ package com.escalab.mediappbackend.repo;
 
 import java.util.List;
 
+import com.escalab.mediappbackend.model.Consulta;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
