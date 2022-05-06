@@ -5,6 +5,10 @@ import com.escalab.mediappbackend.model.Paciente;
 import com.escalab.mediappbackend.repository.PacienteRepository;
 import com.escalab.mediappbackend.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -60,5 +64,21 @@ public class PacienteServiceImpl implements PacienteService {
     public boolean eliminar(Integer id){
         pacienteRepository.deleteById(id);
         return true;
+    }
+
+    @Override
+    public Page<Paciente> listarPageable(Pageable pageable) {
+        return pacienteRepository.findAll(pageable);
+    }
+
+    @Override
+    public ResponseEntity<Object> deletePaciente(Integer id) {
+        Optional<Paciente> paciente = pacienteRepository.findById(id);
+        if(paciente.isPresent()){
+            pacienteRepository.delete(paciente.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            throw new ModeloNotFoundException("El Paciente no fue encontrado, o su valor es nulo");
+        }
     }
 }

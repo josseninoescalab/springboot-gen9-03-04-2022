@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -98,21 +102,20 @@ public class ConsultaServiceImpl implements IConsultaService{
 		return consultas;
 	}
 
-	/*
 	@Override
 	public byte[] generarReporte() {
 		byte[] data = null;
-		
+
 		try {
 			File file = new ClassPathResource("/reports/consultas.jasper").getFile();
-			JasperPrint print = JasperFillManager.fillReport(file.getPath(), null, new JRBeanCollectionDataSource(this.listarResumen()));
-			data = JasperExportManager.exportReportToPdf(print);	
+			JasperPrint print = JasperFillManager.fillReport(file.getPath(),
+					null, new JRBeanCollectionDataSource(this.listarResumen()));
+			data = JasperExportManager.exportReportToPdf(print);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return data;	
+		return data;
 	}
-	*/
 }
 
 	

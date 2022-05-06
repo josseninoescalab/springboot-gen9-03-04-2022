@@ -17,7 +17,7 @@ public interface IConsultaService extends ICRUD<Consulta> {
 	
 	List<ConsultaResumenDTO> listarResumen();
 	
-	//byte[] generarReporte();
+	byte[] generarReporte();
 	
 
 }

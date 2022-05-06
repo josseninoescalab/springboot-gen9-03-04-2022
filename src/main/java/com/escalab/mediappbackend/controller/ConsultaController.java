@@ -3,6 +3,7 @@ package com.escalab.mediappbackend.controller;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.escalab.mediappbackend.dto.ConsultaDTO;
+import com.escalab.mediappbackend.dto.RespuestaDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -148,8 +151,17 @@ public class ConsultaController {
 	@GetMapping(value = "/generarReporte", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public ResponseEntity<byte[]> generarReporte(){
 		byte[] data = null;
-		//data = service.generarReporte();
+		data = service.generarReporte();
 		return new ResponseEntity<byte[]>(data, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/generarReporte/pdf")
+	public @ResponseBody
+	ResponseEntity<RespuestaDTO> generarReportePDF(){
+		byte[] data = null;
+		data = service.generarReporte();
+		String document = Base64.getEncoder().encodeToString(data);
+		return new ResponseEntity<>(new RespuestaDTO(document), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/guardarArchivo", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
